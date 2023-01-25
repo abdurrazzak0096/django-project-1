@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+
+{% block title %} {{title}} {% endblock title %}
+
+
+{% block content %}
+<div>
+    <div class="mt-3 d-inline-block">
+        <h3>List of All Student Information</h3>
+        <a href="{% url 'create_student' %}" class= "btn btn-primary mb-4"> Add New </a>
+    </div>
+    
+    <table id="stdtable" class="table table-striped" style="width:100%">
+        <thead class="thead-dark">
+            <tr>
+                <th>SL</th>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Date of Birth </th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            {% for stud in object_list %}
+               <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ stud.id }}</td>
+                <td>{{ stud.name }}</td>
+                <td>{{ stud.dob }}</td>
+                <td>
+                    <a href="{% url 'update_student' stud.id %}"><i class='fa fa-edit fa-2x'></i></a>
+                    <a href="{% url 'detail_student' stud.id %}"><i class='fa fa-eye fa-2x'></i></a>
+                    <a href="{% url 'delete_student' stud.id %}"><i class='fa fa-trash fa-2x'></i></a>
+                </td>
+               </tr>
+                
+            {% endfor %}
+                
+        </tbody>
+        
+            
+
+        
+    </table>
+</div>    
+{% endblock content %}
+    
+    

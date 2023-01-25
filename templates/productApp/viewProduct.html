@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ title }} {% endblock title %}
+
+
+{% block content %}
+
+    <div class="container">
+        <form action="" method="POST" enctype="multipart/form-data" class="">
+            {% csrf_token %}
+                <div class="row">
+                        <div class="col">
+                            <div class="row mb-3">
+                                <lable for="inputEmail3" class="col-sm-4 col-form-lable">Product Name:</lable>
+                                <div class="col-sm-6">
+                                    {{ product.product_name }}
+                                </div>
+                            </div>
+            
+                            <div class="row mb-3">
+                                <label for="inputPassword3" class="col-sm-4 col-form-lable">Description :</label>
+                                <div class="col-sm-6">
+                                    {{ product.description }}
+                                </div>
+                            </div>
+            
+                            <div class="row mb-3">
+                                <lable for="" class="col-sm-4 col-form-lable">Unit Price:</lable>
+                                <div class="col-sm-6">
+                                    {{ product.unitprice }}
+                                </div>
+                            </div>
+            
+                            <div class="row mb-3">
+                                <lable for="" class="col-sm-4 col-form-lable">Quantity:</lable>
+                                <div class="col-sm-6">
+                                        {{ product.quantity }}
+                                </div>
+                            </div>
+            
+                            <div class="row mb-3">
+                                <lable for="inputEmail3" class="col-sm-4 col-form-lable">Total Price:</lable>
+                                <div class="col-sm-6">
+                                    {{ product.totalprice }}
+                                </div>
+                            </div>
+            
+                            
+                            <div class="row mb-3">
+                                <lable for="inputEmail3" class="col-sm-4 col-form-lable">Category:</lable>
+                                <div class="col-sm-6">
+                                    {{ product.category }}
+                                </div>
+                            </div>
+            
+                            <a href="{% url 'listproduct' %}" class="btn btn-warning">Back to List</a>
+                            
+                        </div>
+                        <div class="col">
+                            <div class="row mb-3">
+                                
+                                <div class="col-sm-6">
+                                <img src="{{ product.images.url }}" alt="" width="300">
+                                </div>
+                            </div>
+            
+                        </div>
+                </div>
+                
+                
+        </form>
+
+    </div>
+    
+{% endblock content %}
+    
+    

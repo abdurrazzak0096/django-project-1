@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Create Product {% endblock title %}
+
+
+{% block content %}
+     <div class="mt-5">
+
+     </div>
+    <div class="row">
+        <div class="col">
+            <div>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    
+                    {% csrf_token %}
+                   
+                    {% load crispy_forms_tags %}
+                    {{ form|crispy }}
+                    <input type="text" id="id_dob" class="dt mb-2" />
+                    <br>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    
+                </form>    
+            </div>
+        </div>
+        <div class="col">
+            <div>
+                <img src="{{ product.images.url }}" alt="No Image" class="blah" width="400px">
+            </div>
+            
+        </div>
+    </div>
+   
+{% endblock content %}
+    
+    

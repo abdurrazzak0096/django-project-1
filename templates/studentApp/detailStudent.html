@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %} Create Product {% endblock title %}
+
+{% block content %}
+     <div class="mt-5">
+       {{ heading }}
+     </div>
+    <div class="row">
+        <div class="col">
+            <div>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    
+                    {% csrf_token %}
+
+
+                    <div class="mb-3">
+                        <label for="formGroupExampleInput" class="form-label">Student Id:</label>
+                        {{ object.id }}
+                      </div>
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label">Student Name:</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput2" value="{{ object.name }} ">
+                      </div>
+                      <div class="mb-3">
+                        <label for="formGroupExampleInput2" class="form-label">Date of Birth:</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput2" value=" {{ object.dob|date:'Y-m-d' }} ">
+                      </div>
+                   
+ 
+                    <a href="{% url 'list_student' %}" class="btn btn-primary"> Back to List </a>
+                    
+                </form>    
+            </div>
+        </div>
+        <div class="col">
+           
+            
+        </div>
+    </div>
+   
+{% endblock content %}
+    
+    

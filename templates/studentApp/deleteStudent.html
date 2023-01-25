@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %} Create Product {% endblock title %}
+
+{% block content %}
+     <div class="mt-5">
+      <h1>{{ heading }}</h1> 
+      <hr>
+     </div>
+    <div class="row">
+        <div class="col">
+            <div>
+                <form action="" method="POST" enctype="multipart/form-data">
+                    
+                    {% csrf_token %}
+                   
+                    <!-- {% load crispy_forms_tags %}
+                    {{ form|crispy }} -->
+                    <p> Do You Want to delete  {{ student.name }} ?</p>
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                    <a href="{% url 'list_student' %}"> Back to list</a>
+                    
+                </form>    
+            </div>
+        </div>
+        <div class="col">
+           
+            
+        </div>
+    </div>
+   
+{% endblock content %}

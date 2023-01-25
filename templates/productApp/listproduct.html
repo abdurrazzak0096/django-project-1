@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    
+{% endblock title %}
+
+
+{% block content %}
+
+<div>
+    <div class="mt-3-d-inline-block">
+        <h3>List of All Student Information</h3>
+        <a href="{% url 'createproduct' %}" class="btn btn-primary mb-4"> Add New</a>
+    </div>
+</div>
+  
+<table id="stdable" class="table table-striped" style="width:100%">
+    <thead class="thead-dark">
+        <tr>
+            <th>SL</th>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Description</th>
+            <th>Unit Price</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Category</th>
+            <th>Chobi</th>
+            <th>Actions</th>
+        </tr>
+
+    </thead>
+    <tbody>
+        {% for prod in products %}
+            <tr>
+                <td>{{forloop.counter }}</td>
+                <td>{{prod.id }}</td>
+                <td>{{prod.product_name }}</td>
+                <td>{{prod.description }}</td>
+                <td>{{prod.unitprice }}</td>
+                <td>{{prod.quantity }}</td>
+                <td>{{prod.totalprice }}</td>
+                <td>{{prod.Category }}</td>
+                <!-- <td>{{prod.images }}</td> -->
+                <td><img src="{{ prod.images.url }}" alt="No" width="50px" height="50px"></td>
+               <td> 
+                <a href="{% url 'productEdit' prod.id %}"><i class='fa fa-edit fa-1.5x'></i></i> </a>
+                <a href="{% url 'productView' prod.id %}"><i class='fa fa-eye fa-1.5x'></i></i> </a>
+                <a href="{% url 'productDelete' prod.id %}"><i class='fa fa-trash fa-1.5x'></i></i> </a>
+                
+               </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        
+        {% if products.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ products.previous_page_number }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+                </a>
+            </li>
+        {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+                </a>
+            </li>
+        {% endif %}
+        
+        {% for i in products.paginator.page_range %}        
+            {% if products.number == i %}
+                <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+            {% endif %}            
+        {% endfor %}
+            
+    
+    {% if products.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ products.next_page_number }}" aria-label="Previous">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+            </a>
+        </li>
+    {% else %}
+        <li class="page-item disabled">
+            <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+            </a>
+        </li>
+    {% endif %}
+    </ul>
+  </nav>
+{% endblock content %}
+    
+    

@@ -1,0 +1,164 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} {% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %} ">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.css" integrity="sha512-YdYyWQf8AS4WSB0WWdc3FbQ3Ypdm0QCWD2k4hgfqbQbRCJBEgX0iAegkl2S1Evma5ImaVXLBeUkIlP6hQ1eYKQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="{% static 'images/favicon1.ico' %}" type="image/x-icon">
+</head>
+<body>
+    <div class="container" id ="menu"> 
+
+        <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="{% url 'home' %}"><img src="{% static 'images/favicon1.ico' %}" alt=""></a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'listproduct' %}">Product</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'list_student' %}">Student</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'show' %}">Gallery </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'contact' %}">Contact</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Item
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Delivery</a></li>
+                      <li><a class="dropdown-item" href="#">About Us</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="#">Order Now!</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled">Disabled</a>
+                  </li>
+                </ul>
+                <!-- side menu-->
+                <div class="d-flex" role="search">
+                  <ul class="navbar-nav">
+                    
+                    {% if request.user.is_authenticated %}
+
+                    <li class="nav-item">
+                      <a class="nav-link" href="">Hello! {{ request.user.username }}</a>
+                    </li>
+                    
+                    <li class="nav-item">
+                      <a class="nav-link" href="{% url 'logout_user' %}">Log Out!</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                    <a class="nav-link btn btn-success text-white" href="{% url 'login_user' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link btn btn-success text-white" href="{% url 'register' %}">Register</a>
+                    </li>
+
+
+                    {% endif %}
+                      
+                    
+                  </ul>
+                </div>
+                <!--end-->
+              </div>
+            </div>
+          </nav>
+    </div>
+<div class="container">
+    
+    {% if messages %}
+      
+      {% for message  in messages  %}
+
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script>
+          swal.fire({
+                      position:'center',
+                      icon: '{{ messages.tags }}',
+                      title: '{{ title }}',
+                      text: '{{ message }}',
+                      showConfirmButtonText:'close',
+                      showConfirmButton: true,
+                      timer: 3000
+          })
+        </script>
+        <!--Popup window position, can be "top", "top-start", "top-end", "center", "center-start", "center-end", "bottom", "bottom-start", "bottom-end".-->
+      
+      {% endfor %}
+        
+    {% endif %}
+      
+    {% block content %}
+        
+    {% endblock content %}
+        
+</div>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js" integrity="sha512-aVKKRRi/Q/YV+4mjoKBsE4x3H+BkegoM/em46NNlCqNTmUYADjBbeNefNxYV7giUp0VxICtqdrbqU7iVaeZNXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js" integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   
+   <script>
+      $(function(){
+          //-------- Bootstrap Date Picker-------
+          $(".dt").datepicker({
+            format:"yyyy-mm-dd",
+            autoclass:true,
+            orientation:"auto"
+           });
+
+      
+        $("#id_images").change(function() {
+          readURL(this);
+        })
+
+      });
+
+      function readURL(input){
+          var filepath = input.value;
+          //Allowing file type
+          var allowedExtensions = 
+          /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+
+          if(!allowedExtensions.exec(filepath)){
+            alert('Invalid file type !!!');
+            input.value = '';
+            return false;
+          }else{
+            if (input.files && input.files[0]){
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                $('.blah')
+                    .attr('src' , e.target.result).width(400);
+              };
+              reader.readAsDataURL(input.files[0]);
+            }
+          }
+        }
+        //end of readURL
+
+
+    </script>
+</body>
+</html>
